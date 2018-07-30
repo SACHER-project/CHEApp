@@ -1,0 +1,91 @@
+<!--
+  Generated template for the EditMonumentPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+    <ion-navbar color='primary'>
+        <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>Modifica informazioni</ion-title>
+      </ion-navbar>
+</ion-header>
+
+<ion-content padding class="sfondo_content">
+	<!--CARD 1 PER AGGIUNTA DEI TAG-->
+	<ion-card>
+		<ion-card-header class="blue-title">
+			Aggiungi nuovo tag
+		</ion-card-header>
+
+		<ion-card-content>
+			<ion-row class="blue-title">
+				Selezionalo dalla lista sottostante:
+			</ion-row>
+
+			<ion-row>
+				<ion-scroll class="ion-scroll-style" scrollY="true">
+					<ion-list>
+						<button ion-item *ngFor="let tag of tagList; let i=index" (click)="addSelectedTag(i)" id="button_tag_list">
+						  <h2> {{tag.val().nome}}</h2>
+						</button>
+					</ion-list>
+				</ion-scroll>
+			</ion-row>
+
+			<ion-row class="blue-title">
+				O inseriscine uno nuovo
+			</ion-row>
+			<ion-row>
+				<button ion-button class="card-button" color="secondary" (click)="openAddNewTagPage()" > <ion-icon name="add-circle" class="icona-bottone"></ion-icon>Crea tag</button>
+			</ion-row>
+		</ion-card-content>
+	</ion-card>
+
+	<!--CARD 2 PER AGGIUNTA DELLE INFORMAZIONI-->
+	<ion-card>
+		<ion-card-header class="blue-title">
+			Aggiungi informazione
+		</ion-card-header>
+
+		<ion-card-content>
+			<ion-row> 
+				<ion-item>
+					<ion-textarea [(ngModel)]="myInput"  placeholder="Nuova informazione..."></ion-textarea>
+				</ion-item>
+			</ion-row>
+
+			<ion-row>
+				<button  ion-button class="card-button" color="secondary" (click)="addInfo()"> <ion-icon name="add-circle" class="icona-bottone"></ion-icon>Inserisci nuova informazione</button>
+			</ion-row>
+		</ion-card-content>
+	</ion-card>
+
+
+	<ion-card>
+		<ion-card-header class="blue-title">
+			Completa informazioni sul luogo
+		</ion-card-header>
+
+		<ion-card-content>
+			<ion-row>
+				<ion-item>
+					<ion-label> Accessibilità</ion-label>
+					<ion-toggle checked="isAccesibilityOn" [(ngModel)] = "isAccessibilityOn"></ion-toggle>
+			</ion-item>
+
+			<ion-item>
+				<ion-label>Adatto alle famiglie</ion-label>
+				<ion-toggle checked="isFamilyOn" [(ngModel)] = "isFamilyOn"></ion-toggle> 
+		</ion-item>
+			</ion-row>
+
+			<ion-row>
+				<button  ion-button class="card-button" color="secondary" (click)="addInfoAF()"> <ion-icon name="add-circle" class="icona-bottone"></ion-icon>Modifica informazioni</button>
+			</ion-row>
+		</ion-card-content>
+	</ion-card>
+
+</ion-content>

@@ -1,0 +1,52 @@
+<!--
+  Generated template for the EditPreferencesPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color='primary'>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Modifica preferenze</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding class="sfondo_content">
+
+    <ion-card>
+        <ion-card-header class="blue-title">
+          Aggiungi una nuova preferenza
+        </ion-card-header>
+    
+        <ion-card-content>
+          <ion-scroll class="box_dimension" scrollY="true">
+            <ion-list>
+              <button ion-item *ngFor="let tag of preferenze_not_user; let i=index" (click)="addSelectedPreferences(i)" >
+                <h2 class="border_tag_list"> {{tag.val().nome}}</h2> <!--Se stampassi solo tag, al momento non mi mostrerebbe niente perchè tag è oggetto-->
+              </button>
+            </ion-list>
+          </ion-scroll>
+        </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header class="blue-title">
+        Elimina una preferenza
+      </ion-card-header>
+  
+      <ion-card-content>
+        <ion-scroll class="box_dimension" scrollY="true">
+          <ion-list>
+            <button ion-item *ngFor="let pref of tags; let i=index" (click)="deleteSelectedPreferences(i)" >
+              <h2 class="border_tag_list"> {{pref.val().nome}}</h2> <!--Se stampassi solo tag, al momento non mi mostrerebbe niente perchè tag è oggetto-->
+            </button>
+          </ion-list>
+        </ion-scroll>
+      </ion-card-content>
+  </ion-card>
+</ion-content>

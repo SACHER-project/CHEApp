@@ -1,0 +1,89 @@
+<!--
+  Generated template for the CreateRoutePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Definisci percorso</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding class="sfondo_content">
+
+  <!--Partenza-->
+  <ion-card>
+    <ion-card-header class="blue-title">
+    Partenza (obbligatorio)
+    </ion-card-header>
+    
+    <ion-card-content>
+      <ion-textarea [(ngModel)]="myInputPartenza"  placeholder="Es: Piazza Maurizio Bufalini, Cesena"></ion-textarea>
+      <ion-row>
+        <ion-col col-6>
+          <button ion-button full class="card-button" [disabled]="!isEnabled" (click)="openModal('partenza')"> <ion-icon name="map" class="icona-bottone"></ion-icon>Mappa</button>
+        </ion-col>
+        <ion-col col-6>
+          <button ion-button full class="card-button" [disabled]="!isEnabled" (click)="setPosition('partenza')"> <ion-icon name="pin" class="icona-bottone"></ion-icon>Posizione</button>
+        </ion-col>
+      </ion-row>      
+    </ion-card-content>
+  </ion-card>
+
+  <!--Arrivo--> 
+  <ion-card>
+    <ion-card-header class="blue-title">
+    Arrivo (obbligatorio)
+    </ion-card-header>
+    
+    <ion-card-content>
+      <ion-textarea [(ngModel)]="myInputArrivo"  placeholder="Es: Piazza Maurizio Bufalini, Cesena"></ion-textarea>
+      <ion-row>
+        <ion-col col-6>
+          <button ion-button full class="card-button" [disabled]="!isEnabled" (click)="openModal('arrivo')"> <ion-icon name="map" class="icona-bottone"></ion-icon>Mappa</button>
+        </ion-col>
+        <ion-col col-6>
+          <button ion-button full class="card-button" [disabled]="!isEnabled" (click)="setPosition('arrivo')"> <ion-icon name="pin" class="icona-bottone"></ion-icon>Posizione</button>
+        </ion-col>
+      </ion-row>      
+    </ion-card-content>
+  </ion-card>
+
+  <!--Impostazione percorso--> 
+  <ion-card>
+      <ion-card-header class="blue-title">
+          Impostazione percorso
+      </ion-card-header>
+      
+      <ion-card-content>
+          <ion-item>
+            <ion-textarea [(ngModel)]="duration"  placeholder="Durata massima (minuti, secondi o ore - esempio: 24m / 24s / 1h)"></ion-textarea>
+          </ion-item>
+
+          <ion-item>
+            <ion-textarea [(ngModel)]="length"  placeholder="Lunghezza massima (metri)"></ion-textarea>
+          </ion-item> 
+
+          <ion-item>
+              <ion-label> Accessibilità</ion-label>
+              <ion-toggle checked="false" [(ngModel)] = "isAccessibilityOn"></ion-toggle>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Adatto alle famiglie</ion-label>
+            <ion-toggle checked="false" [(ngModel)] = "isFamilyOn"></ion-toggle> 
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+
+    
+    <button ion-button class="card-button" [disabled]="!isEnabled" (click)="checkInput()"> <ion-icon name="play" class="icona-bottone"></ion-icon>Calcola percorso</button>
+
+</ion-content>

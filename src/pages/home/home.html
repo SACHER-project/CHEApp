@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-navbar ion-navbar color='primary'>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Home</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="sfondo_content">
+
+  <ion-grid id="griglia_home">
+
+  <!--Riga per la mappa-->
+    <ion-row >
+      <div class="map-container">
+        <div id="map">
+        </div>
+      </div> 
+    </ion-row>
+
+  <!--Riga per il bottone e lista con le direzioni-->
+    <ion-row id="row_button_list">
+      
+      <div *ngIf="routeDisplayed && !clicked" id="div_button_list">
+  
+        <p text-center>
+          <ion-icon name="arrow-dropup-circle" onClick = "document.getElementById('lista_lista').style.height = '300px';" class="icon_style"></ion-icon>      
+          <ion-icon name="arrow-dropdown-circle" onClick = "document.getElementById('lista_lista').style.height = '150px';" class="icon_style"></ion-icon>
+        </p>
+        
+        <ion-scroll id="lista_lista" scrollY="true" >
+            <ion-list *ngFor="let i of instructions" class="member_list">
+              <p [innerHtml]="i" class="p_list"></p>
+            </ion-list>
+        </ion-scroll>
+      </div>
+
+      <button ion-button color="primary" block (click)='planTrip()' id="button_plan"> Pianifica il tuo percorso </button>
+    
+    </ion-row>
+  </ion-grid>
+
+</ion-content> 
+

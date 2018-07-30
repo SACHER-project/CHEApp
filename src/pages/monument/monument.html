@@ -1,0 +1,182 @@
+<!--
+  Generated template for the MonumentPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="primary">
+   <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{poiName}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="sfondo_content">
+
+  <!--Da questa FAB si può chiamare, scrivere la mail e accedere alla homepage del sito-->
+  <ion-fab top right edge  >
+    <button ion-fab mini color="secondary"><ion-icon name="information"></ion-icon></button>
+    <ion-fab-list>
+      <button ion-fab (click)="phoneCall()" [hidden]="!isEnabled_phone" style="contain: layout;"><ion-icon name="call"></ion-icon> <ion-label>Chiama</ion-label></button>
+      <a ion-fab [hidden]="!isEnabled_email" href="mailto:{{email}}" style="contain: layout;"><ion-icon name="mail"></ion-icon> <ion-label>Email</ion-label></a>
+      <a ion-fab [hidden]="!isEnabled_website" href="{{website}}" style="contain: layout;"><ion-icon name="home"></ion-icon> <ion-label>Sito</ion-label></a>
+    </ion-fab-list>
+  </ion-fab>
+
+    <!--Card nome e foto-->
+    <ion-card>
+      <ion-card-header text-center class="blue-title" text-wrap>
+        {{poiName}}
+      </ion-card-header>
+
+      <ion-card-content>
+        <img class="image_style" src="{{foto_url}}"/><!--in foto_url ho il path dal database-->
+        <p text-center class="address" [hidden]=!isEnabled_gratuito >{{indirizzo}}</p>
+        <div text-center id="div_info_poi">
+          <ion-badge class="tag-local tag_access_famiglia" color="secondary" [hidden]=!isEnabled_accessibility > {{accessibility}}</ion-badge>
+          <ion-badge class="tag-local tag_access_famiglia" color="secondary" [hidden]=!isEnabled_family >{{families}}</ion-badge>
+          <ion-badge class="tag-local tag_access_famiglia" color="secondary" >{{gratuito}}</ion-badge>
+        </div>
+
+      </ion-card-content>
+
+    </ion-card>
+
+    <!--Card descrizione e tag-->
+    <ion-card>
+      <!--Sezioni del menù-->
+      <ion-segment [(ngModel)]="menu">
+        <ion-segment-button value="Descrizione" style="border-radius:0px !important">
+          Descrizione
+        </ion-segment-button>
+        <ion-segment-button value="Tag" style="border-radius:0px !important">
+          Tag
+        </ion-segment-button>
+      </ion-segment>
+
+      <ion-card-content>
+        <div [ngSwitch]="menu">
+          <ion-list *ngSwitchCase="'Descrizione'">
+            <ion-card-content text-center>
+              <ion-scroll id="scroll_preferenze" scrollY="true">
+                  <p class="giustificato" *ngFor="let descrizione of poi_photo_description">
+                     {{descrizione.descrizione}}
+                  </p>
+              </ion-scroll>
+            </ion-card-content>
+          </ion-list>
+
+          <ion-list *ngSwitchCase="'Tag'">
+            <ion-card-content text-center>
+              <!--SE sono presenti tag allora vedo questo box | Se isEnabled è true allora sta nascosto-->
+              <ion-scroll id="scroll_preferenze" scrollY="true" [hidden]="!isEnabled_tag">
+                <ion-row id ="tag-row" justify-content-center align-items-center>
+
+                  <ion-list *ngFor="let tag of poiTags" id="tag_list"> <!-- Lista di badge -->
+                    <!-- <ion-badge class="tag-local" color="secondary">{{tag.val().nome}}</ion-badge> -->
+                    <ion-badge class="tag-local" color="secondary">{{tag}}</ion-badge>
+                  </ion-list>
+                </ion-row>
+              </ion-scroll>
+
+              <ion-scroll id="scroll_preferenze" [hidden]="isEnabled_tag" scrollY="true" text-justify >
+                <p>Aggiungi per primo un tag a questo punto di interesse!</p>
+              </ion-scroll>
+
+            </ion-card-content>
+          </ion-list>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!--Card informazioni utenti-->
+    <ion-card>
+      <ion-card-header class="blue-title">
+            Informazioni dagli utenti
+      </ion-card-header>
+
+      <ion-card-content text-justify>
+          <ion-scroll id="scroll_preferenze" scrollY = "true" [hidden]="!isEnabled_info" >
+            <ion-item *ngFor="let d of descriptions" id="user_info_poi">
+                <h2 text-wrap><b>"{{d.text}}"</b></h2>
+                <h3>{{d.user}} - {{d.data_ins | date: 'dd/MM/yyyy'}}</h3>
+            </ion-item>
+          </ion-scroll>
+
+          <ion-scroll id="scroll_preferenze" [hidden]="isEnabled_info" scrollY="true" text-justify >
+            <p>Nessuna informazione presente, aggiungine una tu!</p>
+          </ion-scroll>
+      </ion-card-content>
+
+    </ion-card>
+
+    <!--Card foto utenti-->
+    <ion-card>
+      <ion-card-header class="blue-title">
+            Foto utenti (clicca per visualizzare)
+      </ion-card-header>
+
+      <ion-card-content>
+
+          <!--Gallery stile pinterest-->
+        <ion-scroll scrollY="true" id="scroll_pinterest_style" [hidden]="!isEnabled_foto" >
+              <div class="images" >
+                <div class="one-image" *ngFor="let image of poi_user_photos; let i=index">
+                  <img src="{{image}}"  (click)="openModal(i)"> <!--Al click della foto si apre la modale!-->
+                </div>
+              </div>
+          </ion-scroll>
+
+        <ion-scroll id="scroll_preferenze" [hidden]="isEnabled_foto" scrollY="true" text-justify >
+            <p>Questo punto di interesse non ha ancora una foto</p>
+        </ion-scroll>
+
+      </ion-card-content>
+    </ion-card>
+
+    <!--Card con i bottoni per l'edit e il caricamento delle foto-->
+    <ion-card>
+      <ion-card-content>
+        <!--Cliccando sul bottone si apre la pagina per la modifica del monumento-->
+        <ion-row>
+            <button ion-button class="card-button" (click)=openEditMonumentPage() > <ion-icon name="add-circle" class="icona-bottone"></ion-icon>  Contribuisci</button>
+        </ion-row>
+
+        <!--Cliccando sul bottone si apre la pagina per il caricamento della foto-->
+        <ion-row>
+            <button ion-button class="card-button" (click)=openUploadPhotoPage()  color="secondary" > <ion-icon name="images" class="icona-bottone"></ion-icon>Carica foto</button>
+        </ion-row>
+
+      </ion-card-content>
+    </ion-card>
+
+    <!--Pulsanti condivisione social-->
+    <ion-card>
+      <ion-card-header class="blue-title">
+        Condividi!
+      </ion-card-header>
+
+      <ion-card-content>
+        <div text-center>
+          <button ion-button (click)="whatsappShare()" style="background-color: #0D9F16" class="bottoni_social">
+              <ion-icon name="logo-whatsapp" item-start class="icone_social"></ion-icon>
+          </button>
+
+          <button ion-button (click)="twitterShare()" style="background-color: #28A9E0" class="bottoni_social">
+              <ion-icon name="logo-twitter" item-start  class="icone_social"></ion-icon>
+          </button>
+
+          <button ion-button (click)="facebookShare()" style="background-color: #3B5998" class="bottoni_social">
+              <ion-icon name="logo-facebook" item-start  class="icone_social"></ion-icon>
+          </button>
+
+          <button ion-button (click)="otherShare()" style="background-color: red" class="bottoni_social">
+              <ion-icon name="share" item-start  class="icone_social"></ion-icon>
+          </button>
+
+        </div>
+      </ion-card-content>
+    </ion-card>
+</ion-content>

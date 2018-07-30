@@ -1,0 +1,165 @@
+<!--
+  Generated template for the ProfilePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color='primary'>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Profilo di {{username}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="sfondo_content">
+  
+  <!--Card per avatar, punti e livello-->
+  <ion-card>
+
+    <ion-card-content>
+      <ion-grid style="padding: 0px !important">
+        <ion-row>
+            <ion-col col-6 style="text-align: center;">
+              <button ion-button (click)="selectPhoto()" color="light" id="profilo_Avatar" >
+                  <img *ngFor="let item of items_user_details;" src="{{item.avatar}}"> <!--All'upload dell'avatar, questo link dovrà cambiare per mostrare la nuova foto -->
+              </button>
+            </ion-col>
+            
+            <ion-col col-6>
+              <!--<ion-row>-->
+                  <b  class="blue-title ">{{username}}</b>
+                <div *ngFor="let item of items_user_details;">
+                  <p><b>N° foto:</b> {{item.num_of_photo}}</p> 
+                  <p><b>N° info:</b> {{item.num_of_info}}</p>
+                  <p><b>N° tag:</b> {{item.num_of_tag}}</p>
+                </div>
+              <!--</ion-row>-->
+            </ion-col>
+
+            <ion-col col-12>
+              <!--<ion-row>-->
+                <div *ngFor="let item of items_user_details;">
+                  <p><b>Registrazione:</b> {{correct_data | date: 'dd/MM/yyyy'}}</p>
+                  <p><b>Email:</b> {{item.clear_email}}</p>
+                  <p><b>Punti totali:</b> {{item.total_points}}</p> 
+                  <p><b>Num achievements:</b> {{item.num_ach}}/16</p>
+                  <p><b>Num badge:</b> {{item.num_badge}}/17</p>
+                </div>
+              <!--</ion-row>-->
+            </ion-col>
+
+            
+        </ion-row>
+
+        <ion-row>
+          <button ion-button class="card-button" (click)=openAchievementsPage() > <ion-icon name="apps" class="icona-bottone"></ion-icon>Achievements</button>
+        </ion-row>
+
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+  <!--Card SEGMENT per il menù tra badge e preferenze (tag scelti)-->
+  <ion-card>
+    <ion-segment [(ngModel)]="menu">
+      <ion-segment-button value="Preferenze" style="border-radius:0px !important">
+        Preferenze
+      </ion-segment-button>
+      <ion-segment-button value="Badge" style="border-radius:0px !important">
+        Badge
+      </ion-segment-button>     
+    </ion-segment>
+
+    <ion-card-content>
+
+    <div [ngSwitch]="menu">
+
+      <!--SETTORE DELLE PREFERENZE-->
+        <ion-list *ngSwitchCase="'Preferenze'">
+          <ion-card-content style="text-align: center;">
+
+            <!--Se l'utente ha delle preferenze le mostro a video-->
+            <ion-scroll id="scroll_preferenze" scrollY="true" [hidden]="!isEnabled_preferenze">
+              <ion-list *ngFor="let tag of tags">
+                <p>{{tag}}</p>
+              </ion-list>
+            </ion-scroll>
+
+             <!--Se l'utente non ha preferenze (quindi 0 num_of_tag) mostro l'avviso-->
+            <ion-scroll id="scroll_preferenze" [hidden]="isEnabled_preferenze" scrollY="true" text-justify >
+              <p>Aggiungi delle preferenze per personalizzare i tuoi percorsi!</p>
+            </ion-scroll>
+
+          </ion-card-content>  
+        </ion-list>
+      
+      <!--SETTORE DEI BADGE-->
+        <ion-list *ngSwitchCase="'Badge'">
+          <ion-card-content style="text-align: center;">
+            
+            <!--Se l'utente ha dei badge (quindi ha più di 0 num_badges) mostro i badge che ha.-->
+            <ion-scroll id="scroll_preferenze" [hidden]="!isEnabled_badges" scrollY="true"  >
+             
+              <ion-list  *ngFor="let badge of badges_utente_misto;" >
+                <ion-badge class="tag-profile" color="secondary">{{badge}} </ion-badge>
+              </ion-list>
+                  
+              <ion-list  *ngFor="let badge of badges_utente_taggatore;">
+                <ion-badge class="tag-profile" color="dark">{{badge}} </ion-badge>
+              </ion-list>
+                  
+              <ion-list  *ngFor="let badge of badges_utente_fotografo;">
+                <ion-badge class="tag-profile" color="danger">{{badge}} </ion-badge>
+              </ion-list>
+                  
+              <ion-list  *ngFor="let badge of badges_utente_informatore;">
+                 <ion-badge class="tag-profile">{{badge}} </ion-badge>
+              </ion-list>
+                          
+            </ion-scroll>
+
+            <!--Se l'utente non ha badge (quindi 0 num_badge) mostro l'avviso-->
+            <ion-scroll id="scroll_preferenze" [hidden]="isEnabled_badges" scrollY="true" text-justify >
+              <p>Non hai ancora nessun badge, perchè non contibuisci scattando foto, inserendo tag o informazioni su un punto di interesse, per ottenerne?</p>
+            </ion-scroll>
+
+          </ion-card-content>
+        </ion-list>
+    </div>
+    </ion-card-content>
+  </ion-card>
+
+ <!--Card per foto--> 
+  <ion-card>
+    <ion-card-header class="blue-title">
+    Foto caricate
+    </ion-card-header>
+
+    <ion-card-content class="card-background-page"  id="foto-card">
+      
+      <!--Gallery stile pinterest ____ Se l'utente HA foto -->
+      <ion-scroll scrollY="true" style="height:300px;" [hidden]="!isEnabled_photos">
+          <div class="images" >
+            <div class="one-image" *ngFor="let image of profile_user_photos; let i=index">
+              <img src="{{image}}"  (click)="openModal(i)"> <!--Al click della foto si apre la modale!-->
+            </div>
+          </div>
+      </ion-scroll>
+
+      <!--Se l'utente non ha FOTO (quindi 0 num_foto) mostro l'avviso-->
+      <ion-scroll id="scroll_preferenze" [hidden]="isEnabled_photos" scrollY="true" text-justify >
+        <p>Carica la tua prima foto di punto di interesse!</p>
+      </ion-scroll>
+
+    </ion-card-content>
+  </ion-card>
+
+
+
+
+  
+
+
+</ion-content>

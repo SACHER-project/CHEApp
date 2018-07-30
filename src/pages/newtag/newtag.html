@@ -1,0 +1,39 @@
+
+<ion-header>
+
+  <ion-navbar color="primary">
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+    <ion-title>{{poiName}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding class="sfondo_content">
+    <ion-card>
+        <ion-card-header class="blue-title">
+            Digita il nuovo tag:
+        </ion-card-header>
+
+        <ion-card-content>
+                <!--<h3>Digita il nuovo tag: </h3>-->
+                <ion-searchbar [(ngModel)]="myInput" (ionInput)="getItems($event)" placeholder="Aggiungi tag ... "></ion-searchbar>
+                    <ion-scroll id="ion-scroll-comp" scrollY="true">
+                        <ion-list>
+                            <ion-item *ngFor="let tag of tagList" id="ion-item-list">
+                                <h2> {{ tag.nome }} </h2>
+                            </ion-item>
+                        </ion-list>
+                    </ion-scroll>
+                <button ion-button [disabled]="!isEnabled" (click)="clickedButton()" style="width: 100%">Aggiungi</button>
+        </ion-card-content>
+
+
+ 
+
+</ion-card>
+</ion-content>
+
+

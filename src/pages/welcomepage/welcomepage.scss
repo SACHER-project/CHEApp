@@ -1,0 +1,51 @@
+page-welcomepage {
+	
+	p {
+		text-align: center;
+	}
+
+	#foto-cop{
+		text-align: center;
+	}
+	
+	button{
+		width: 95%;
+	}
+
+	#app_title{
+		text-shadow: 2px 2px 4px #000000;
+	}
+
+	#big_title{
+		color: white; 
+		font-family: 'Helvetica Neue', sans-serif; 
+		font-size: 50px; 
+		font-weight: bold; 
+		letter-spacing: -1px; 
+		line-height: 1; 
+		text-align: center;
+	}
+
+	#little_title{
+		color: white; 
+		margin-top: -50px !important; 
+		font-family: 'Open Sans', sans-serif; 
+		font-size: 20px; 
+		font-weight: 300; 
+		line-height: 32px; 
+		margin: 0 0 72px; 
+		text-align: center;
+	}
+
+	#app_title{
+		position: sticky;
+	}
+
+	#buttons_log_reg{
+		position: fixed;
+		bottom: 0;
+		width: 100%;
+	}
+	
+} /*Graffa di chiusa CSS*/
+

@@ -1,0 +1,68 @@
+page-rank {
+
+
+
+	.classifica {
+  		border: solid 1px white;
+  		border-bottom-style: none;
+  		border-right-style: none;
+  		text-align: center;
+	}
+
+	.classifica:last-child {
+  		border-right: solid 1px white;
+	}
+
+	.row:last-child .classifica {
+  		border-bottom: solid 1px white;
+	}
+
+
+
+	.centered{
+		text-align: center;
+	}
+
+	#user_position{
+		color: white;
+		font-family: 'Helvetica Neue', sans-serif;
+		font-size: 20px;
+		font-weight: bold;
+		//letter-spacing: -1px;
+		line-height: 1;
+
+	}
+
+	#header_classifica{
+		background: #95613a !important;
+		color: white;
+		text-transform: uppercase;
+		font-weight: bold;
+	}
+
+	.voci_table_header{
+		text-transform: uppercase;
+	}
+
+	.points{
+		color:#95613a;
+		font-weight: bold;
+		margin-right: 20px !important;
+		margin-left: 15px !important;
+	}
+
+	#item_lista{
+		border-bottom: 2px solid #e0e0e0;
+	}
+
+
+	#avatar_list{
+		width: 50px;
+		height: 50px;
+		border: 1px solid #e0e0e0;
+	}
+
+	
+
+} /*Graffa di chiusa CSS*/
+

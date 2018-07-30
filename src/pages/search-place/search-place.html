@@ -1,0 +1,38 @@
+<!--
+  Generated template for the SearchPlacePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  
+    <ion-navbar color='primary'>
+    <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>Cerca luogo in {{city}}</ion-title>
+    </ion-navbar>
+    <ion-searchbar [(ngModel)]="myInput" (ionInput)="getItems($event)"></ion-searchbar> <!--Così rimane in cima alla barra anche quando scorro la lista-->
+  </ion-header>
+  
+  <ion-content padding class="sfondo_content">
+    <ion-list>
+      <ion-card *ngFor="let item of poisList;">
+        <button ion-item (click)="openPlace(item)">
+
+              <img class="image_style" src="{{item.foto_POI}}" />
+              <ion-card-content>
+                  <ion-card-title text-wrap id="titolo_card">{{item.myPoi.nome}}</ion-card-title >
+                   <p text-center>{{item.address}}</p>            
+              </ion-card-content>
+           
+          </button> 
+        </ion-card>
+    </ion-list>
+    
+  
+    
+  
+  
+  </ion-content>
+  

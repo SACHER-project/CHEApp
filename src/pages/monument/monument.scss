@@ -1,0 +1,133 @@
+page-monument {
+
+	.tag-local{
+		margin-left: 5px;
+		margin-right: 5px;
+		margin-bottom: 2px;
+		width: 100%;
+	}
+
+	#tag-row{
+		margin-bottom: 5px;
+	}
+
+	.icona-bottone{
+		padding-right: 5px;
+	}
+
+	#tag_list{
+		margin-left: 2px; 
+		margin-right: 2px;
+	}
+	
+
+	.giustificato{
+		text-align: justify;
+	}
+
+	#scroll_preferenze{
+		height: 150px;
+	}
+	
+	.image_style{
+		width: 200px !important;
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+		border: 2px solid #e0e0e0;
+	}
+
+	//PER GALLERY STILE PINTEREST
+	.image-container {
+        min-height: 200px;
+        background-size: cover;
+    }
+ 
+    @media (min-width: 0px) {
+        .images {
+            column-count: 2;
+        }
+    }
+ 
+    @media (min-width: 420px) {
+        .images {
+            column-count: 3;
+        }
+    }
+ 
+    @media (min-width: 720px) {
+        .images {
+            column-count: 4;
+        }
+    }
+ 
+    .one-image {
+        margin: 2px;
+    }
+    
+    .tag_access_famiglia{
+        width: 100px !important;
+    }
+
+	//Per le label delle fabs
+	button[ion-fab] {
+        overflow: visible;
+        position: relative;
+
+        ion-label {
+            position: absolute;
+            top: -8px;
+            right: 40px;
+
+            color: white;
+            background-color: rgba(0,0,0,0.7);
+            line-height: 24px;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+	}
+	
+	a[ion-fab] {
+        overflow: visible;
+        position: relative;
+
+        ion-label {
+            position: absolute;
+            top: -8px;
+            right: 40px;
+
+            color: white;
+            background-color: rgba(0,0,0,0.7);
+            line-height: 24px;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+    }
+    
+    .address{
+        color: #666; 
+        margin-top: 10px;
+    }
+
+    #div_info_poi{
+        margin-top: 10px;
+    }
+    
+    #user_info_poi{
+        border-bottom: 1px solid #ebebe0;
+    }
+
+    #scroll_pinterest_style{
+        height:200px;
+    }
+
+    .bottoni_social{
+        height: 50px; 
+        border-radius: 50px !important;
+    }
+
+    .icone_social{
+       font-size: 25px;
+    }
+
+}
