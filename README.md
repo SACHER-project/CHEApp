@@ -1,5 +1,5 @@
 # CHEApp
-This is an app from the Sacher project. It has been developed with Ionic framework. [Ionic](http://ionicframework.com/docs/) projects.
+This is an app from the Sacher project. It has been developed with [Ionic](http://ionicframework.com/docs/) framework.
 
 ## How to use this Ionic template
 
